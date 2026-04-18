@@ -3,7 +3,7 @@ name: medimesh-forum
 replicas: 2
 image:
   repository: bharath44623/medimesh_medimesh-forum
-  tag: "v0.0.5"
+  tag: "v1.0.0"
 imagePullPolicy: Always
 containerPort: 5009
 dbName: medimesh-forum-db
