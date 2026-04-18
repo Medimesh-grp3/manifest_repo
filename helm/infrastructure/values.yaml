@@ -1,0 +1,19 @@
+# MediMesh Infrastructure Values
+nameOverride: ""
+fullnameOverride: ""
+
+namespaces:
+  frontend: medimesh-frontend
+  backend: medimesh-backend
+  db: medimesh-db
+
+environment: production
+
+mongo:
+  host: medimesh-mongodb
+  port: 27017
+
+storage:
+  nfs:
+    server: "172.31.90.107"
+    storageClass: nfs-dynamic-medimesh

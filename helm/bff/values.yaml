@@ -1,0 +1,45 @@
+# ─── MediMesh BFF Values ──────────────────────────────────
+name: medimesh-bff
+replicas: 2
+image:
+  repository: bharath44623/medimesh_medimesh-bff
+  tag: "v1.1.0"
+imagePullPolicy: Always
+containerPort: 5010
+
+service:
+  name: medimesh-bff-svc
+  type: ClusterIP
+  port: 5010
+  targetPort: 5010
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+readinessProbe:
+  path: /health
+  port: 5010
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+
+livenessProbe:
+  path: /health
+  port: 5010
+  initialDelaySeconds: 15
+  periodSeconds: 20
+  timeoutSeconds: 5
+
+strategy:
+  type: RollingUpdate
+  maxUnavailable: 1
+  maxSurge: 1
+
+# Previously global values — now local
+namespaces:
+  backend: medimesh-backend

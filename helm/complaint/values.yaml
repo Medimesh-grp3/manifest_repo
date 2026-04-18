@@ -1,0 +1,33 @@
+# ─── MediMesh Complaint Service Values ────────────────────
+name: medimesh-complaint
+replicas: 2
+image:
+  repository: bharath44623/medimesh_medimesh-complaint
+  tag: "v0.0.2"
+imagePullPolicy: Always
+containerPort: 5008
+dbName: medimesh-complaint-db
+
+service:
+  name: medimesh-complaint-svc
+  port: 5008
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+extraEnv: []
+
+# Previously global values — now local
+namespaces:
+  backend: medimesh-backend
+  db: medimesh-db
+
+mongo:
+  host: medimesh-mongodb
+  port: 27017
+  replicaSet: rs0

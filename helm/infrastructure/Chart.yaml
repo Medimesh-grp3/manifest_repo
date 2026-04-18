@@ -1,0 +1,14 @@
+apiVersion: v2
+name: infrastructure
+description: MediMesh — Shared Infrastructure (Namespaces, ConfigMap, NetworkPolicies, SealedSecrets)
+type: application
+version: 1.0.0
+appVersion: "v2.0.0"
+keywords:
+  - medimesh
+  - infrastructure
+  - namespaces
+  - network-policies
+maintainers:
+  - name: Bharath
+home: https://github.com/bharath44623/MediMesh

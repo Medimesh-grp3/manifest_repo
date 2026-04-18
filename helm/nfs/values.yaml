@@ -1,0 +1,33 @@
+# ─── MediMesh NFS Provisioner Values ──────────────────────
+provisioner:
+  name: nfs-client-provisioner
+  image:
+    repository: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner
+    tag: "v4.0.2"
+    pullPolicy: IfNotPresent
+  provisionerName: medimesh/nfs-subdir-external-provisioner
+  resources:
+    requests:
+      cpu: "50m"
+      memory: "64Mi"
+    limits:
+      cpu: "100m"
+      memory: "128Mi"
+
+storageClass:
+  isDefault: false
+  onDelete: retain
+  reclaimPolicy: Retain
+  volumeBindingMode: Immediate
+  allowVolumeExpansion: true
+  pathPattern: "${.PVC.namespace}-${.PVC.name}"
+
+# Previously global values — now local
+namespaces:
+  db: medimesh-db
+
+storage:
+  nfs:
+    server: "172.31.90.107"
+    path: "/srv/nfs/medimesh"
+    storageClass: nfs-dynamic-medimesh

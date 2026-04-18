@@ -1,0 +1,33 @@
+# ─── MediMesh Ambulance Service Values ────────────────────
+name: medimesh-ambulance
+replicas: 2
+image:
+  repository: bharath44623/medimesh_medimesh-ambulance
+  tag: "v0.0.8"
+imagePullPolicy: Always
+containerPort: 5007
+dbName: medimesh-ambulance-db
+
+service:
+  name: medimesh-ambulance-svc
+  port: 5007
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+extraEnv: []
+
+# Previously global values — now local
+namespaces:
+  backend: medimesh-backend
+  db: medimesh-db
+
+mongo:
+  host: medimesh-mongodb
+  port: 27017
+  replicaSet: rs0

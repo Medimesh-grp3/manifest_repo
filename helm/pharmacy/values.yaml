@@ -1,0 +1,33 @@
+# ─── MediMesh Pharmacy Service Values ─────────────────────
+name: medimesh-pharmacy
+replicas: 2
+image:
+  repository: bharath44623/medimesh_medimesh-pharmacy
+  tag: "v0.0.8"
+imagePullPolicy: Always
+containerPort: 5006
+dbName: medimesh-pharmacy-db
+
+service:
+  name: medimesh-pharmacy-svc
+  port: 5006
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+extraEnv: []
+
+# Previously global values — now local
+namespaces:
+  backend: medimesh-backend
+  db: medimesh-db
+
+mongo:
+  host: medimesh-mongodb
+  port: 27017
+  replicaSet: rs0

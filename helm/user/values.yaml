@@ -1,0 +1,39 @@
+# ─── MediMesh User Service Values ─────────────────────────
+name: medimesh-user
+replicas: 2
+image:
+  repository: bharath44623/medimesh_medimesh-user
+  tag: "v0.0.2"
+imagePullPolicy: Always
+containerPort: 5002
+dbName: medimesh-user-db
+
+service:
+  name: medimesh-user-svc
+  port: 5002
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+extraEnv:
+  - name: DOCTOR_SERVICE_URL
+    value: "http://medimesh-doctor-svc.medimesh-backend.svc.cluster.local:5003"
+  - name: AMBULANCE_SERVICE_URL
+    value: "http://medimesh-ambulance-svc.medimesh-backend.svc.cluster.local:5007"
+  - name: PHARMACY_SERVICE_URL
+    value: "http://medimesh-pharmacy-svc.medimesh-backend.svc.cluster.local:5006"
+
+# Previously global values — now local
+namespaces:
+  backend: medimesh-backend
+  db: medimesh-db
+
+mongo:
+  host: medimesh-mongodb
+  port: 27017
+  replicaSet: rs0
