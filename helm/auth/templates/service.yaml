@@ -1,4 +1,4 @@
-# Auth ClusterIP Service
+# Auth Service - Active (Blue)
 apiVersion: v1
 kind: Service
 metadata:
@@ -8,12 +8,28 @@ metadata:
     app: {{ .Values.name }}
     tier: backend
 spec:
-  type: ClusterIP
   selector:
     app: {{ .Values.name }}
     tier: backend
   ports:
-    - port: {{ .Values.service.port }}
+    - protocol: TCP
+      port: {{ .Values.service.port }}
       targetPort: {{ .Values.containerPort }}
-      protocol: TCP
-      name: http
+---
+# Auth Service - Preview (Green)
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}-preview
+  namespace: {{ .Values.namespaces.backend }}
+  labels:
+    app: {{ .Values.name }}
+    tier: backend
+spec:
+  selector:
+    app: {{ .Values.name }}
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.containerPort }}
