@@ -1,19 +1,37 @@
-# Forum ClusterIP Service
+# forum Service - Active (Blue)
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.service.name }}
+  name: medimesh-forum-svc
   namespace: {{ .Values.namespaces.backend }}
   labels:
     app: {{ .Values.name }}
     tier: backend
 spec:
-  type: ClusterIP
   selector:
     app: {{ .Values.name }}
     tier: backend
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.containerPort }}
+    - name: http
       protocol: TCP
-      name: http
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.containerPort }}
+---
+# forum Service - Preview (Green)
+apiVersion: v1
+kind: Service
+metadata:
+  name: medimesh-forum-svc-preview
+  namespace: {{ .Values.namespaces.backend }}
+  labels:
+    app: {{ .Values.name }}
+    tier: backend
+spec:
+  selector:
+    app: {{ .Values.name }}
+    tier: backend
+  ports:
+    - name: http
+      protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.containerPort }}
