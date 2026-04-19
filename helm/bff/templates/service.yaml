@@ -1,8 +1,7 @@
-# bff Service - Active (Blue)
 apiVersion: v1
 kind: Service
 metadata:
-  name: medimesh-bff-svc
+  name: {{ .Values.service.name }}
   namespace: {{ .Values.namespaces.backend }}
   labels:
     app: {{ .Values.name }}
@@ -17,11 +16,10 @@ spec:
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.containerPort }}
 ---
-# bff Service - Preview (Green)
 apiVersion: v1
 kind: Service
 metadata:
-  name: medimesh-bff-svc-preview
+  name: {{ .Values.service.name }}-preview
   namespace: {{ .Values.namespaces.backend }}
   labels:
     app: {{ .Values.name }}
