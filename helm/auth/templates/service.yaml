@@ -12,7 +12,8 @@ spec:
     app: {{ .Values.name }}
     tier: backend
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.containerPort }}
 ---
@@ -30,6 +31,7 @@ spec:
     app: {{ .Values.name }}
     tier: backend
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.containerPort }}

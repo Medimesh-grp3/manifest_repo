@@ -31,6 +31,7 @@ spec:
           ports:
             - containerPort: {{ .Values.containerPort }}
               name: http
+              protocol: TCP
           env:
             - name: PORT
               value: {{ .Values.containerPort | quote }}
