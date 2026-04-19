@@ -20,7 +20,9 @@ resources:
     cpu: "500m"
     memory: "512Mi"
 
-extraEnv: []
+extraEnv:
+  - name: DEMO_VERSION
+    value: "v2"
 
 # Previously global values — now local
 namespaces:
