@@ -8,14 +8,14 @@ metadata:
     managed-by: github-actions-oidc
 rules:
   - apiGroups: ["argoproj.io"]
-    resources: ["rollouts"]
-    verbs: ["get", "list", "patch", "update"]
+    resources: ["rollouts", "rollouts/status"]
+    verbs: ["get", "list", "watch", "patch", "update"]
   - apiGroups: ["apps"]
-    resources: ["replicasets"]
-    verbs: ["get", "list"]
+    resources: ["deployments", "replicasets"]
+    verbs: ["get", "list", "watch"]
   - apiGroups: [""]
-    resources: ["pods"]
-    verbs: ["get", "list"]
+    resources: ["pods", "pods/log"]
+    verbs: ["get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
