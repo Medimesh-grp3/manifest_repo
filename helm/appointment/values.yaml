@@ -3,7 +3,7 @@ name: medimesh-appointment
 replicas: 2
 image:
   repository: bharath44623/medimesh_medimesh-appointment
-  tag: "v0.1.4"
+  tag: "v0.1.5"
 imagePullPolicy: Always
 containerPort: 5004
 dbName: medimesh-appointment-db
