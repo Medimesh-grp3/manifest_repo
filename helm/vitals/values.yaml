@@ -3,15 +3,13 @@ name: medimesh-vitals
 replicas: 2
 image:
   repository: bharath44623/medimesh_medimesh-vitals
-  tag: "v0.0.2"
+  tag: "v0.0.6"
 imagePullPolicy: Always
 containerPort: 5005
 dbName: medimesh-vitals-db
-
 service:
   name: medimesh-vitals-svc
   port: 5005
-
 resources:
   requests:
     cpu: "100m"
@@ -19,14 +17,11 @@ resources:
   limits:
     cpu: "500m"
     memory: "512Mi"
-
 extraEnv: []
-
 # Previously global values — now local
 namespaces:
   backend: medimesh-backend
   db: medimesh-db
-
 mongo:
   host: medimesh-mongodb
   port: 27017
