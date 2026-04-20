@@ -41,6 +41,11 @@ spec:
                 configMapKeyRef:
                   name: medimesh-config
                   key: NODE_ENV
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: medimesh-secrets
+                  key: JWT_SECRET
             {{- if .Values.extraEnv }}
             {{- toYaml .Values.extraEnv | nindent 12 }}
             {{- end }}
