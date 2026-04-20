@@ -1,6 +1,6 @@
-# Frontend Deployment
-apiVersion: apps/v1
-kind: Deployment
+# Frontend Rollout - Blue/Green Strategy
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: {{ .Values.name }}
   namespace: {{ .Values.namespaces.frontend }}
@@ -14,11 +14,6 @@ spec:
     matchLabels:
       app: {{ .Values.name }}
       tier: frontend
-  strategy:
-    type: {{ .Values.strategy.type }}
-    rollingUpdate:
-      maxUnavailable: {{ .Values.strategy.maxUnavailable }}
-      maxSurge: {{ .Values.strategy.maxSurge }}
   template:
     metadata:
       labels:
@@ -32,6 +27,7 @@ spec:
           ports:
             - containerPort: {{ .Values.containerPort }}
               name: http
+              protocol: TCP
           env:
             - name: BFF_SERVICE_URL
               value: "http://medimesh-bff-svc.{{ .Values.namespaces.backend }}.svc.cluster.local:5010"
@@ -62,6 +58,7 @@ spec:
         # Log aggregator sidecar
         - name: log-sidecar
           image: {{ .Values.sidecar.image }}
+          imagePullPolicy: IfNotPresent
           command: ["sh", "-c", "while true; do tail -f /var/log/nginx/access.log /var/log/nginx/error.log 2>/dev/null; sleep 2; done"]
           volumeMounts:
             - name: nginx-logs
@@ -76,3 +73,8 @@ spec:
       volumes:
         - name: nginx-logs
           emptyDir: {}
+  strategy:
+    blueGreen:
+      activeService: {{ .Values.service.name }}
+      previewService: {{ .Values.service.name }}-preview
+      autoPromotionEnabled: false
