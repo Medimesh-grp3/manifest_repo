@@ -37,3 +37,23 @@ strategy:
 # Previously global values — now local
 namespaces:
   backend: medimesh-backend
+
+extraEnv:
+  - name: AUTH_SERVICE_URL
+    value: "http://medimesh-auth-svc.medimesh-backend.svc.cluster.local:5001"
+  - name: USER_SERVICE_URL
+    value: "http://medimesh-user-svc.medimesh-backend.svc.cluster.local:5002"
+  - name: DOCTOR_SERVICE_URL
+    value: "http://medimesh-doctor-svc.medimesh-backend.svc.cluster.local:5003"
+  - name: APPOINTMENT_SERVICE_URL
+    value: "http://medimesh-appointment-svc.medimesh-backend.svc.cluster.local:5004"
+  - name: VITALS_SERVICE_URL
+    value: "http://medimesh-vitals-svc.medimesh-backend.svc.cluster.local:5005"
+  - name: PHARMACY_SERVICE_URL
+    value: "http://medimesh-pharmacy-svc.medimesh-backend.svc.cluster.local:5006"
+  - name: AMBULANCE_SERVICE_URL
+    value: "http://medimesh-ambulance-svc.medimesh-backend.svc.cluster.local:5007"
+  - name: COMPLAINT_SERVICE_URL
+    value: "http://medimesh-complaint-svc.medimesh-backend.svc.cluster.local:5008"
+  - name: FORUM_SERVICE_URL
+    value: "http://medimesh-forum-svc.medimesh-backend.svc.cluster.local:5009"

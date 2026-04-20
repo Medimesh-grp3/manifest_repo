@@ -1,4 +1,4 @@
-# BFF Service Rollout - Blue/Green Strategy
+# BFF Service Deployment - RollingUpdate Strategy
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,6 +14,11 @@ spec:
     matchLabels:
       app: {{ .Values.name }}
       tier: backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
@@ -36,6 +41,9 @@ spec:
                 configMapKeyRef:
                   name: medimesh-config
                   key: NODE_ENV
+            {{- if .Values.extraEnv }}
+            {{- toYaml .Values.extraEnv | nindent 12 }}
+            {{- end }}
           readinessProbe:
             httpGet:
               path: {{ .Values.readinessProbe.path }}
@@ -57,8 +65,3 @@ spec:
             limits:
               cpu: {{ .Values.resources.limits.cpu | quote }}
               memory: {{ .Values.resources.limits.memory | quote }}
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
