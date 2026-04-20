@@ -3,15 +3,13 @@ name: medimesh-doctor
 replicas: 2
 image:
   repository: bharath44623/medimesh_medimesh-doctor
-  tag: "v0.0.4"
+  tag: "v0.0.5"
 imagePullPolicy: Always
 containerPort: 5003
 dbName: medimesh-doctor-db
-
 service:
   name: medimesh-doctor-svc
   port: 5003
-
 resources:
   requests:
     cpu: "100m"
@@ -19,14 +17,11 @@ resources:
   limits:
     cpu: "500m"
     memory: "512Mi"
-
 extraEnv: []
-
 # Previously global values — now local
 namespaces:
   backend: medimesh-backend
   db: medimesh-db
-
 mongo:
   host: medimesh-mongodb
   port: 27017
