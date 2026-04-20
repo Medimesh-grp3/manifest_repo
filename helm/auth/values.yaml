@@ -3,15 +3,13 @@ name: medimesh-auth
 replicas: 2
 image:
   repository: bharath44623/medimesh_medimesh-auth
-  tag: "v0.0.6"
+  tag: "v0.0.7"
 imagePullPolicy: Always
 containerPort: 5001
 dbName: medimesh-auth-db
-
 service:
   name: medimesh-auth-svc
   port: 5001
-
 resources:
   requests:
     cpu: "100m"
@@ -19,16 +17,13 @@ resources:
   limits:
     cpu: "500m"
     memory: "512Mi"
-
 extraEnv:
   - name: DEMO_VERSION
     value: "v2"
-
 # Previously global values — now local
 namespaces:
   backend: medimesh-backend
   db: medimesh-db
-
 mongo:
   host: medimesh-mongodb
   port: 27017
