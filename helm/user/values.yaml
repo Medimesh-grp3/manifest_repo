@@ -3,15 +3,13 @@ name: medimesh-user
 replicas: 2
 image:
   repository: bharath44623/medimesh_medimesh-user
-  tag: "v0.0.2"
+  tag: "v0.0.3"
 imagePullPolicy: Always
 containerPort: 5002
 dbName: medimesh-user-db
-
 service:
   name: medimesh-user-svc
   port: 5002
-
 resources:
   requests:
     cpu: "100m"
@@ -19,7 +17,6 @@ resources:
   limits:
     cpu: "500m"
     memory: "512Mi"
-
 extraEnv:
   - name: DOCTOR_SERVICE_URL
     value: "http://medimesh-doctor-svc.medimesh-backend.svc.cluster.local:5003"
@@ -27,12 +24,10 @@ extraEnv:
     value: "http://medimesh-ambulance-svc.medimesh-backend.svc.cluster.local:5007"
   - name: PHARMACY_SERVICE_URL
     value: "http://medimesh-pharmacy-svc.medimesh-backend.svc.cluster.local:5006"
-
 # Previously global values — now local
 namespaces:
   backend: medimesh-backend
   db: medimesh-db
-
 mongo:
   host: medimesh-mongodb
   port: 27017
