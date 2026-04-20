@@ -3,7 +3,7 @@ name: medimesh-ambulance
 replicas: 2
 image:
   repository: bharath44623/medimesh_medimesh-ambulance
-  tag: "v0.0.13"
+  tag: "v0.0.14"
 imagePullPolicy: Always
 containerPort: 5007
 dbName: medimesh-ambulance-db
