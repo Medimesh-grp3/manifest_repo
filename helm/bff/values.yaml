@@ -3,7 +3,7 @@ name: medimesh-bff
 replicas: 2
 image:
   repository: bharath44623/medimesh_medimesh-bff
-  tag: "v0.0.1"
+  tag: "v0.0.2"
 imagePullPolicy: Always
 containerPort: 5010
 service:
