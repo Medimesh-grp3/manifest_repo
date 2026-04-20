@@ -1,6 +1,6 @@
-# Auth Service Rollout - Blue/Green Strategy
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
+# complaint Deployment - RollingUpdate Strategy
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ .Values.name }}
   namespace: {{ .Values.namespaces.backend }}
@@ -70,9 +70,8 @@ spec:
               memory: {{ .Values.resources.requests.memory | quote }}
             limits:
               cpu: {{ .Values.resources.limits.cpu | quote }}
-              memory: {{ .Values.resources.limits.memory | quote }}
-  strategy:
-    blueGreen:
-      activeService: {{ .Values.service.name }}
-      previewService: {{ .Values.service.name }}-preview
-      autoPromotionEnabled: false
+              memory: {{ .Values.resources.limits.memory | quote }}  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
