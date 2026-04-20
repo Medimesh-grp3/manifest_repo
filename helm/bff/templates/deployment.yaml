@@ -56,7 +56,8 @@ spec:
               memory: {{ .Values.resources.requests.memory | quote }}
             limits:
               cpu: {{ .Values.resources.limits.cpu | quote }}
-              memory: {{ .Values.resources.limits.memory | quote }}  strategy:
+              memory: {{ .Values.resources.limits.memory | quote }}
+  strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
