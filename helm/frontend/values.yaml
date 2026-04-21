@@ -3,7 +3,7 @@ name: medimesh-frontend
 replicas: 2
 image:
   repository: bharath44623/medimesh_medimesh-frontend
-  tag: "v0.0.2"
+  tag: "v2.1.0"
 imagePullPolicy: Always
 containerPort: 80
 service:
