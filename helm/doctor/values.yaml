@@ -3,7 +3,7 @@ name: medimesh-doctor
 replicas: 2
 image:
   repository: bharath44623/medimesh_medimesh-doctor
-  tag: "v0.0.6"
+  tag: "v0.0.7"
 imagePullPolicy: Always
 containerPort: 5003
 dbName: medimesh-doctor-db
